@@ -113,3 +113,25 @@ body {
 .progress-bar {
     display: none;
 }
+
+.currentTime {
+    font-size: 13px;
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 56.5%;
+    left: 17%;
+    cursor: pointer;
+}
+
+.durationTime {
+    font-size: 13px;
+    color: var(--green);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 43.5%;
+    right: 13%;
+    cursor: pointer;
+}

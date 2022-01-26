@@ -6,6 +6,36 @@ const background = document.querySelector('.background');
 const thumbnail = document.querySelector('.thumbnail');
 let isPlay = false;
 
+const currentTimeText = document.querySelector('.currentTime');
+const durationTime = document.querySelector('.durationTime');
+
+// FIND DURATION TIME
+
+function findDurationTime(audio) {
+    let min = Math.floor(Math.floor(audio.duration) / 60);
+    let sec = Math.floor(audio.duration) % 60;
+    if (sec === 0 || sec < 10) {
+        sec = '0' + sec;
+    }
+    return `${min}:${sec}`;
+}
+
+// CHANGE CURRENT TIME
+
+function changeCurrentTime() {
+
+    setInterval(() => {
+        let min = Math.floor(Math.floor(audio.currentTime) / 60);
+        let sec = Math.floor(audio.currentTime) % 60;
+        if (sec === 0 || sec < 10) {
+        sec = '0' + sec;
+    }
+    currentTimeText.innerHTML = `${min}:${sec}`;
+    }, 500);
+}
+
+changeCurrentTime();
+
 function playPause() {
     if (!isPlay) {
         btn.src = './assets/svg/pause.png';
@@ -61,6 +91,9 @@ function prevSong() {
     }
 
     changeSongDetails();
+    audio.onloadedmetadata = () => {
+        durationTime.innerHTML = findDurationTime(audio);
+    };
     isPlay = false;
     playPause();
 }
@@ -75,6 +108,10 @@ function nextSong() {
     }
 
     changeSongDetails();
+    audio.onloadedmetadata = () => {
+        durationTime.innerHTML = findDurationTime(audio);
+    };
+    durationTime.innerHTML = findDurationTime(audio);
     isPlay = false;
     playPause();
 }
@@ -88,8 +125,6 @@ function changeSongDetails() {
     songArtist.innerHTML = SONGS[index].artist;
     songTitle.innerHTML = SONGS[index].title;
 }
-
-console.log(SONGS.findIndex(el => el.artist === songArtist));
 
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
