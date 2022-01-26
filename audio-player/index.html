@@ -5,13 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./assets/favicon.ico">
     <title>Audio Player</title>
 </head>
 
 <body>
-
+    <img src="./assets/img/lemonade.png" alt="Background" class="background" id="background">
+    <audio src="/assets/audio/beyonce.mp3" class="audio"></audio>
+    <div class="container">
+        <img src="./assets/img/lemonade.png" alt="Thumbnail" class="thumbnail" id="thumbnail">
+        <div class="panel">
+            <img src="./assets/svg/play.png" alt="Play/Pause" class="play-pause">
+            <img src="./assets/svg/backward.png" alt="Previous" class="prev">
+            <img src="./assets/svg/forward.png" alt="Next" class="next">
+            <p class="song-artist">Beyonce</p>
+            <p class="song-title">Don't hurt yourself</p>
+            <input type="range" class="progress-bar" value="0">
+        </div>
+    </div>
 </body>
 
 </html>

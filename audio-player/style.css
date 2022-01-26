@@ -1,0 +1,106 @@
+:root {
+    --green: #C1FF06;
+    --black: #000000;
+    --white: #FFFFFF;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.background {
+    width: 100%;
+    height: 100vh;
+    filter: blur(10px);
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 333px;
+    height: 400px;
+    margin: auto;
+    background-color: var(--black);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.thumbnail {
+    position: absolute;
+    width: 103%;
+    top: -7%;
+    transition: 1s;
+}
+
+.panel {
+    position: absolute;
+    width: 103%;
+    height: 50%;
+    bottom: -17%;
+    background: -webkit-linear-gradient(45deg, rgb(40, 40, 40), rgb(133, 133, 133))
+}
+
+.play-pause {
+    width: 50px;
+    height: 50px;
+    filter: invert(1);
+    position: absolute;
+    top: 12%;
+    left: 10%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.prev,
+.next {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+    position: absolute;
+    transition: 0.3s;
+    right: 11.8%;
+    cursor: pointer;
+}
+
+.prev {
+    top: 8%;
+}
+
+.next {
+    top: 25%;
+}
+
+.song-artist {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--green);
+    position: absolute;
+    top: 13%;
+    left: 28%;
+}
+
+.song-title {
+    font-size: 17px;
+    color: var(--white);
+    text-transform: capitalize;
+    position: absolute;
+    top: 24.8%;
+    left: 28%;
+}
+
+.progress-bar {
+    display: none;
+}
