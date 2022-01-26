@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./assets/favicon.ico">
+    <title>Eco-Sounds</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo nav-logo nav-item active" data-audio-title="forest"></div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-list__item nav-item" data-audio-title="solovey">Соловей</li>
+                    <li class="nav-list__item nav-item" data-audio-title="drozd">Дрозд</li>
+                    <li class="nav-list__item nav-item" data-audio-title="zarynka">Малиновка</li>
+                    <li class="nav-list__item nav-item" data-audio-title="javoronok">Жаворонок</li>
+                    <li class="nav-list__item nav-item" data-audio-title="slavka">Славка</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+        <div class="shadow active"></div>
+        <audio src="./assets/audio/forest.mp3" class="audio"></audio>
+        <button class="button play"></button>
+    </main>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-data">
+                <p class="footer-data__text">&copy;</p>
+                <p class="footer-data__text">2022</p>
+                <p class="footer-data__text">
+                    <a class="github-link" href="https://github.com/Alekice" target="_blank"
+                        title="My GitHub">github</a>
+                </p>
+            </div>
+            <a class="logo rss-logo" href="https://rs.school/js-stage0/" target="_blank"
+                title="JavaScript/Front-end. Stage 0">
+            </a>
+        </div>
+    </footer>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
