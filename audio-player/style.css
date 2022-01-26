@@ -64,6 +64,10 @@ body {
     cursor: pointer;
 }
 
+.play-pause:hover {
+    opacity: 0.75;
+}
+
 .prev,
 .next {
     width: 30px;
@@ -81,6 +85,11 @@ body {
 
 .next {
     top: 25%;
+}
+
+.prev:hover,
+.next:hover {
+    opacity: 0.75;
 }
 
 .song-artist {
