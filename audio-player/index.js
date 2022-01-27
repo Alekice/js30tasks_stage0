@@ -1,57 +1,3 @@
-// PLAY-PAUSE BUTTON
-
-const btn = document.querySelector('.play-pause');
-const audio = document.querySelector('.audio');
-const background = document.querySelector('.background');
-const thumbnail = document.querySelector('.thumbnail');
-let isPlay = false;
-
-const currentTimeText = document.querySelector('.currentTime');
-const durationTime = document.querySelector('.durationTime');
-
-// FIND DURATION TIME
-
-function findDurationTime(audio) {
-    let min = Math.floor(Math.floor(audio.duration) / 60);
-    let sec = Math.floor(audio.duration) % 60;
-    if (sec === 0 || sec < 10) {
-        sec = '0' + sec;
-    }
-    return `${min}:${sec}`;
-}
-
-// CHANGE CURRENT TIME
-
-function changeCurrentTime() {
-
-    setInterval(() => {
-        let min = Math.floor(Math.floor(audio.currentTime) / 60);
-        let sec = Math.floor(audio.currentTime) % 60;
-        if (sec === 0 || sec < 10) {
-        sec = '0' + sec;
-    }
-    currentTimeText.innerHTML = `${min}:${sec}`;
-    }, 500);
-}
-
-changeCurrentTime();
-
-function playPause() {
-    if (!isPlay) {
-        btn.src = './assets/svg/pause.png';
-        thumbnail.style.transform = 'scale(1.15)';
-        audio.play();
-        isPlay = true;
-    } else {
-        btn.src = './assets/svg/play.png';
-        thumbnail.style.transform = 'scale(1)';
-        audio.pause();
-        isPlay = false;
-    }
-}
-
-btn.addEventListener('click', playPause);
-
 const SONGS = [
     {
         artist: 'Beyonce',
@@ -72,6 +18,12 @@ const SONGS = [
         thumbnail: 'mortal.png'
     }];
 
+const btn = document.querySelector('.play-pause');
+const audio = document.querySelector('.audio');
+const background = document.querySelector('.background');
+const thumbnail = document.querySelector('.thumbnail');
+let isPlay = false;
+
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 const AUDIO_DIR = './assets/audio/';
@@ -80,6 +32,69 @@ let songArtist = document.querySelector('.song-artist');
 let songTitle = document.querySelector('.song-title');
 let index = 0;
 let lastIndex = SONGS.length - 1;
+
+const progressBar = document.querySelector('.progress-bar');
+
+const currentTimeText = document.querySelector('.currentTime');
+const durationTime = document.querySelector('.durationTime');
+
+// GET TIME
+
+function getTime(num) {
+    let min = Math.floor(Math.floor(num) / 60);
+    let sec = Math.floor(num) % 60;
+    if (sec === 0 || sec < 10) {
+        sec = '0' + sec;
+    }
+    return `${min}:${sec}`;
+}
+
+// CHANGE PROGRESS BAR
+
+function changeProgressBarBackground() {
+    progressBar.style.background = `linear-gradient(to right, var(--green) 0%, var(--green) ${progressBar.value}%, var(--black) ${progressBar.value}%, var(--black) 100%)`;
+}
+
+function changeProgressBar() {
+    // CHANGE AUDIO CURRENT TIME
+    audio.currentTime = progressBar.value / 100 * audio.duration;
+    currentTimeText.textContent = getTime(audio.currentTime);
+    changeProgressBarBackground();
+}
+
+progressBar.addEventListener('input', changeProgressBar);
+
+// PLAY-PAUSE BUTTON
+
+function playPause() {
+    if (!isPlay) {
+        btn.src = './assets/svg/pause.png';
+        thumbnail.style.transform = 'scale(1.15)';
+        audio.play();
+        isPlay = true;
+    } else {
+        btn.src = './assets/svg/play.png';
+        thumbnail.style.transform = 'scale(1)';
+        audio.pause();
+        isPlay = false;
+    }
+
+    // CHANGE CURRENT TIME
+
+    setInterval(() => {
+        progressBar.value = audio.currentTime / audio.duration * 100;
+        changeProgressBarBackground();
+        currentTimeText.textContent = getTime(audio.currentTime);
+        if (audio.currentTime === audio.duration) {
+            nextSong();
+        }
+    }, 500);
+}
+
+btn.addEventListener('click', playPause);
+
+
+
 
 // PREVIOUS SONG
 
@@ -92,9 +107,9 @@ function prevSong() {
 
     changeSongDetails();
     audio.onloadedmetadata = () => {
-        durationTime.innerHTML = findDurationTime(audio);
+        durationTime.textContent = getTime(audio.duration);
     };
-    isPlay = false;
+    isPlay = !isPlay;
     playPause();
 }
 
@@ -109,10 +124,9 @@ function nextSong() {
 
     changeSongDetails();
     audio.onloadedmetadata = () => {
-        durationTime.innerHTML = findDurationTime(audio);
+        durationTime.textContent = getTime(audio.duration);
     };
-    durationTime.innerHTML = findDurationTime(audio);
-    isPlay = false;
+    isPlay = !isPlay;
     playPause();
 }
 
@@ -122,8 +136,8 @@ function changeSongDetails() {
     background.src = IMG_DIR + SONGS[index].thumbnail;
     thumbnail.src = IMG_DIR + SONGS[index].thumbnail;
     audio.src = AUDIO_DIR + SONGS[index].track;
-    songArtist.innerHTML = SONGS[index].artist;
-    songTitle.innerHTML = SONGS[index].title;
+    songArtist.textContent = SONGS[index].artist;
+    songTitle.textContent = SONGS[index].title;
 }
 
 prevBtn.addEventListener('click', prevSong);
