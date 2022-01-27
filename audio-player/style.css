@@ -168,3 +168,18 @@ body {
     right: 13%;
     cursor: pointer;
 }
+
+.volume {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+    position: absolute;
+    transition: 0.3s;
+    bottom: 38.5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.volume:hover {
+    opacity: 0.75;
+}

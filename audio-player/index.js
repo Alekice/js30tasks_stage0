@@ -142,3 +142,19 @@ function changeSongDetails() {
 
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+
+
+// VOLUME SETTINGS
+
+const volumeBtn = document.querySelector('.volume');
+
+function sounOnOff() {
+    audio.muted = !audio.muted;
+    if (audio.muted) {
+        volumeBtn.src = './assets/svg/mute.png';
+    } else {
+        volumeBtn.src = './assets/svg/sound.png';
+    }
+}
+
+volumeBtn.addEventListener('click', sounOnOff);
