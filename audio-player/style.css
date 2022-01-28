@@ -169,17 +169,74 @@ body {
     cursor: pointer;
 }
 
+.volume-container {
+    width: 30px;
+    height: 90px;
+    position: absolute;
+    bottom: 38.5%;
+    right: 5%;
+}
+
 .volume {
     width: 30px;
     height: 30px;
     filter: invert(1);
     position: absolute;
     transition: 0.3s;
-    bottom: 38.5%;
-    right: 5%;
     cursor: pointer;
+    bottom: 0;
 }
 
 .volume:hover {
     opacity: 0.75;
+}
+
+.volume-container:hover .volume-bar {
+    width: 60px;
+}
+
+.volume-container:hover .volume-bar::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.volume-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    z-index: 4;
+    height: 5px;
+    background: #000000;
+    border-radius: 30px;
+    width: 0px;
+    left: 48%;
+    bottom: 28%;
+    transform: rotate(-90deg);
+    transform-origin:  left 0;
+    transition: 0.3s;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -3px;
+    margin-left: 0px;
+    height: 10px;
+    width: 7px;
+    border: 0;
+    background: -webkit-linear-gradient(45deg, #D5D5D5, var(--green));
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.volume-bar::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    max-height: 5px;
+    border-radius: 30px;
+}
+
+.volume-bar:focus {
+    outline: none;
 }
