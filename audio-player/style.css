@@ -205,7 +205,7 @@ body {
     position: absolute;
     z-index: 4;
     height: 5px;
-    background: #000000;
+    background: var(--green);
     border-radius: 30px;
     width: 0px;
     left: 48%;

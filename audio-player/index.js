@@ -51,15 +51,15 @@ function getTime(num) {
 
 // CHANGE PROGRESS BAR
 
-function changeProgressBarBackground() {
-    progressBar.style.background = `linear-gradient(to right, var(--green) 0%, var(--green) ${progressBar.value}%, var(--black) ${progressBar.value}%, var(--black) 100%)`;
+function changeProgressBarBackground(bar) {
+    bar.style.background = `linear-gradient(to right, var(--green) 0%, var(--green) ${bar.value}%, var(--black) ${bar.value}%, var(--black) 100%)`;
 }
 
 function changeProgressBar() {
     // CHANGE AUDIO CURRENT TIME
     audio.currentTime = progressBar.value / 100 * audio.duration;
     currentTimeText.textContent = getTime(audio.currentTime);
-    changeProgressBarBackground();
+    changeProgressBarBackground(progressBar);
 }
 
 progressBar.addEventListener('input', changeProgressBar);
@@ -83,7 +83,7 @@ function playPause() {
 
     setInterval(() => {
         progressBar.value = audio.currentTime / audio.duration * 100;
-        changeProgressBarBackground();
+        changeProgressBarBackground(progressBar);
         currentTimeText.textContent = getTime(audio.currentTime);
         if (audio.currentTime === audio.duration) {
             nextSong();
@@ -147,14 +147,31 @@ nextBtn.addEventListener('click', nextSong);
 // VOLUME SETTINGS
 
 const volumeBtn = document.querySelector('.volume');
+const volumeBar = document.querySelector('.volume-bar');
 
-function sounOnOff() {
+function soundOnOff() {
     audio.muted = !audio.muted;
     if (audio.muted) {
         volumeBtn.src = './assets/svg/mute.png';
+        volumeBar.value = 0;
+        changeProgressBarBackground(volumeBar);
     } else {
         volumeBtn.src = './assets/svg/sound.png';
+        volumeBar.value = audio.volume * 100;
+        changeProgressBarBackground(volumeBar);
     }
 }
 
-volumeBtn.addEventListener('click', sounOnOff);
+volumeBtn.addEventListener('click', soundOnOff);
+
+// CHANGE VOLUME BAR
+
+function changeVolume() {
+    if (audio.muted) {
+        soundOnOff();
+    }
+    audio.volume = volumeBar.value / 100;
+    changeProgressBarBackground(volumeBar);
+}
+
+volumeBar.addEventListener('input', changeVolume);
